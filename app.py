@@ -2,6 +2,7 @@ from flask import Flask
 from flask_mysqldb import MySQL
 from flask_restful import Api
 from controllers.user_controller import UserController
+from controllers.ticket_controller import TicketController
 
 
 app = Flask(__name__)
@@ -11,6 +12,7 @@ app.secret_key = b'`eKYqPUAyTPov?(n?:@4ts14_&/'
 mysql = MySQL(app)
 
 api.add_resource(UserController, '/user/<action>/<user_id>')
+api.add_resource(TicketController, '/ticket/<action>/<ticket_id>')
 
 
 @app.after_request
