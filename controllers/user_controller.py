@@ -1,6 +1,5 @@
 from flask import request, session
 from flask_restful import Resource
-
 from classes.user import User
 
 
@@ -22,6 +21,12 @@ class UserController(Resource):
         if action == 'create':
             user = User.create(**request.json)
             return user.__dict__
+
+        if action == 'login':
+            user = User.get(user_id)
+            if user is None:
+                return 'User doesn\'t exists', 500
+            user.login()
 
     def put(self, action, user_id):
 
